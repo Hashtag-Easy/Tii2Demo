@@ -3,6 +3,8 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
+$cookieValidationKey = '3d6b6e5a1d3c2b2a1e1f5b6a7d8e9f0d';
+
 $config = [
   'id' => 'basic',
   'basePath' => dirname(__DIR__),
@@ -13,7 +15,7 @@ $config = [
   ],
   'components' => [
     'request' => [
-      'cookieValidationKey' => 'your-secret-key',
+      'cookieValidationKey' => $cookieValidationKey,
         'enableCsrfValidation' => true,
     ],
     'cache' => [
