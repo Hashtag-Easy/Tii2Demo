@@ -19,12 +19,12 @@ class SiteController extends Controller
                     [
                         'actions' => ['login'],
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => ["?","@"],
                     ],
                     [
                         'actions' => ['logout', 'index'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ["?","@"],
                     ],
                 ],
             ],
@@ -42,6 +42,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
+          var_dump(Yii::$app->user->identity->username);
             return $this->goHome();
         }
 
