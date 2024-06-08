@@ -35,7 +35,19 @@ class LoginForm extends Model
 
     public function login()
     {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+        $user = $this->getUser();
+
+        if (is_null($user))
+        {
+          return $this->alert(false);
+        }
+
+        if (!$user->validatePassword($this->password))
+        {
+          return $this->alert(false);
+        }
+
+        return Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);
     }
 
     protected function getUser()
@@ -45,5 +57,13 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+
+    public function alert($result)
+    {
+      $message = "Username or password is incorrect. Please try again.";
+      echo "<script type='text/javascript'>alert('$message');</script>";
+
+      return $result;
     }
 }

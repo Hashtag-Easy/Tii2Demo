@@ -58,4 +58,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
+
+    private function consoleLog($data) {
+      $output = json_encode($data);
+      echo "<script>console.log($output);</script>";
+  }
 }
